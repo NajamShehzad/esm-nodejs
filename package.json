@@ -1,0 +1,56 @@
+{
+  "name": "@giltayar/ah-theyre-here-esm-nodejs",
+  "version": "1.0.13",
+  "description": "",
+  "main": "src/ah-theyre-here-esm-nodejs.mjs",
+  "engines": {
+    "node": ">=13.9.0"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "postinstall": "cd src/07-conditional-exports/dual-mode-package && npm install",
+    "build": "npm-run-all -p 'build:*'",
+    "build:03-esm-is-browser-compatible": "node scripts/generate-import-maps.mjs",
+    "build:06-exports": "cd src/06-exports && cp -R package-with-exports ../../node_modules && cp -R cjs-package-with-exports ../../node_modules",
+    "build:07-conditional-exports": "cd src/07-conditional-exports/dual-mode-package && npm run build && cp -R ../dual-mode-package ../../../node_modules",
+    "test": "npm run eslint && npm run test:mocha",
+    "test:mocha": "mocha --no-timeouts --exit 'test/*.test.mjs'",
+    "eslint": "eslint '**/*.js' '**/*.mjs'"
+  },
+  "keywords": [
+    "nodejs",
+    "esmodules",
+    "talk"
+  ],
+  "author": "Gil Tayar <gil@tayar.org>",
+  "license": "UNLICENSED",
+  "repository": {
+    "url": "https://github.com/giltayar/ah-theyre-here-esm-nodejs",
+    "type": "git"
+  },
+  "dependencies": {
+    "mjs-example": "^1.0.2"
+  },
+  "devDependencies": {
+    "@jsenv/node-module-import-map": "^11.1.1",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.1.0",
+    "eslint-plugin-mocha-no-only": "^1.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "fastify": "^2.14.1",
+    "fastify-static": "^2.7.0",
+    "get-stream": "^5.1.0",
+    "mocha": "7.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
+    "puppeteer": "^3.2.0"
+  }
+}
